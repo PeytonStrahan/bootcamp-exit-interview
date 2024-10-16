@@ -103,6 +103,11 @@ example output =>
 ]
 */
 
+let nameAgeGender = pets.map(function(pet){
+    return `${pet.name} - ${pet.gender} - ${pet.age}`;
+});
+console.log(nameAgeGender);
+
 /*
 Use the native map method to return a new array of strings of each pet's vet visit
 notes uppercased.
@@ -119,6 +124,26 @@ example output =>
 ]
 */
 
+let visitsUppercase = pets.map(function(pet){
+    return pet.vetVisits.map(function(visit){
+        return visit.notes.toUpperCase();
+    })
+});
+
+let visitsUppercaseFinal = [].concat(...visitsUppercase);
+
+console.log(visitsUppercaseFinal);
+
+
+
+// VERSION 0.5 (it works too!)
+
+let visitsUppercaseStep2 = [];
+for (let i = 0; i < visitsUppercase.length; i++) {
+    visitsUppercaseStep2 = visitsUppercaseStep2.concat(visitsUppercase[i]);
+}
+console.log(visitsUppercaseStep2);
+
 /*
 Use the native reduce method to return a string of each pet's name followed by the
 date of their most recent vet vist (assume the most recent is the visit that is LAST
@@ -127,3 +152,12 @@ in the array).
 example output =>
 "Noodles - last visit: October 15, 2024\nFleur - last visit: July 20, 2024\nBernie - last visit: September 5, 2024\nBart - last visit: November 22, 2022"
 */
+
+let mostRecentVisits = pets.reduce(function(acc, pet){
+    acc += `${pet.name} - last visit: ${pet.vetVisits[pet.vetVisits.length - 1].date}\n`;
+    return acc;
+}, "");
+
+mostRecentVisits = mostRecentVisits.slice(0, mostRecentVisits.length - 1);
+
+console.log(mostRecentVisits);
