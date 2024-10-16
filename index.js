@@ -74,10 +74,21 @@ Use the native filter method to return a new array of only the pets that are dog
 that have had only one vet vist.
 */
 
+let dogsOneVisit = pets.filter(function(pet){
+    return (pet.species === "dog" && Object.keys(pet.vetVisits).length === 1);
+})
+console.log(dogsOneVisit);
 /*
 Use the native filter method to return a new array of only the pets that have had
 vet vists marked as 'Emergency'.
 */
+
+let emergencyVisitPets = pets.filter(function(pet){
+    return pet.vetVisits.filter(function(visit){
+        return visit.type === "Emergency";
+    }).length;
+})
+console.log(emergencyVisitPets);
 
 /*
 Use the map method to return a new array of strings containing each pet's name, age, 
